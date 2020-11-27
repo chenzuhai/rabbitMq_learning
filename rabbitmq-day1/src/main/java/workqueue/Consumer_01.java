@@ -25,7 +25,7 @@ public class Consumer_01 {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
                 System.out.println("消费者1=>"+new String(body));
-                channel.basicAck(envelope.getDeliveryTag(),false);
+                channel.basicAck(envelope.getDeliveryTag(),false);  //手动确认消息
             }
         });
 
