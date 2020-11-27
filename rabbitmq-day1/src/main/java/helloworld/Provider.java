@@ -32,7 +32,7 @@ public class Provider {
         //参数4：autoDelete,是否消费完成后自动删除队列
         //参数5：附加参数
         channel.queueDeclare("hello1",true,false,false,null);
-        channel.queueDeclare("hello2",false,false,false,null);
+        channel.queueDeclare("hello2",false,false,true,null);
 
         //发布消息
         //参数1：交换机名称
