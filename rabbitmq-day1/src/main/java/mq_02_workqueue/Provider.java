@@ -1,7 +1,8 @@
-package fanout;
+package mq_02_workqueue;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
+import user.User;
 import util.RabbitMqUtil;
 
 import java.io.IOException;
@@ -12,20 +13,20 @@ import java.io.IOException;
  * @date 2020/11/27
  */
 
-//广播消息
+//消费者平均消费
 public class Provider {
-
     public static void main(String[] args) throws IOException {
+
         Connection connection = RabbitMqUtil.getConnection();
+
         Channel channel = connection.createChannel();
 
-        //交换机 名称 和 类型  fanout为广播
-        channel.exchangeDeclare("logs","fanout");
-
-        //发送消息
-        channel.basicPublish("logs","",null,"fanout type message".getBytes());
+        channel.queueDeclare("workQueue",true,false,false,null);
+        for (int i = 0; i < 100; i++) {
+            channel.basicPublish("","workQueue",null,(i+"hello workQueue").getBytes());
+        }
 
         RabbitMqUtil.closeConnectionAndChannel(connection,channel);
-    }
 
+    }
 }

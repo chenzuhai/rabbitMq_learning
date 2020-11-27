@@ -1,4 +1,4 @@
-package workqueue;
+package mq_02_workqueue;
 
 import com.rabbitmq.client.*;
 import util.RabbitMqUtil;

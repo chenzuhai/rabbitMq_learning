@@ -1,4 +1,4 @@
-package fanout;
+package mq_03_fanout;
 
 import com.rabbitmq.client.*;
 import util.RabbitMqUtil;
@@ -11,14 +11,14 @@ import java.io.IOException;
  * @date 2020/6/18
  */
 
-public class consumer_02 {
+public class consumer_03 {
     public static void main(String[] args) throws IOException {
         Connection connection = RabbitMqUtil.getConnection();
 
         Channel channel = connection.createChannel();
 
         //绑定交换机
-        channel.exchangeDeclare("logs","fanout");
+        channel.exchangeDeclare("logs", "mq_03_fanout");
 
         //临时队列
         String queue = channel.queueDeclare().getQueue();
@@ -30,7 +30,7 @@ public class consumer_02 {
         channel.basicConsume(queue,true,new DefaultConsumer(channel){
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
-                System.out.println("消费者2===》"+new String(body));
+                System.out.println("消费者3===》"+new String(body));
             }
         });
 

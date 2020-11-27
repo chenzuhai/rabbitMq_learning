@@ -1,4 +1,4 @@
-package helloworld;
+package mq_01_helloworld;
 
 import com.rabbitmq.client.*;
 import org.junit.Test;

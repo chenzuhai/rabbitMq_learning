@@ -1,8 +1,7 @@
-package helloworld;
+package mq_01_helloworld;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.MessageProperties;
 import org.junit.Test;
 import util.RabbitMqUtil;
