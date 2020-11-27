@@ -2,6 +2,7 @@ package workqueue;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
+import user.User;
 import util.RabbitMqUtil;
 
 import java.io.IOException;
