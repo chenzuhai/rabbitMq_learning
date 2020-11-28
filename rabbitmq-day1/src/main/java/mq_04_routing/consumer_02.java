@@ -1,6 +1,7 @@
 package mq_04_routing;
 
 import com.rabbitmq.client.*;
+import util.ExchangerType;
 import util.RabbitMqUtil;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ public class consumer_02 {
 
         Channel channel = connection.createChannel();
 
-        channel.exchangeDeclare("logs_direct","direct",false);
+        channel.exchangeDeclare("logs_direct", ExchangerType.DIRECT,false);
 
         //创建一个临时队列
         String queue = channel.queueDeclare().getQueue();

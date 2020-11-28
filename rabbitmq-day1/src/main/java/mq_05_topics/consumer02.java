@@ -1,40 +1,34 @@
-package mq_04_routing;
+package mq_05_topics;
 
 import com.rabbitmq.client.*;
 import util.ExchangerType;
 import util.RabbitMqUtil;
 
 import java.io.IOException;
-import java.util.concurrent.Exchanger;
 
 /**
  * @author Zuhai Chen
  * @version 1.0
- * @date 2020/11/27
+ * @date 2020/11/28
  */
-public class consumer_01 {
+
+public class consumer02 {
     public static void main(String[] args) throws IOException {
         Connection connection = RabbitMqUtil.getConnection();
-
         Channel channel = connection.createChannel();
 
-        channel.exchangeDeclare("logs_direct", ExchangerType.DIRECT,false);
+        channel.exchangeDeclare("topics", ExchangerType.TOPICS);
 
-        //创建一个临时队列
         String queue = channel.queueDeclare().getQueue();
 
-        //基于routeKey绑定队列和交换机
-        channel.queueBind(queue,"logs_direct","error");
+        channel.queueBind(queue,"topics","user.#");
 
-        //消费消息
         channel.basicConsume(queue,true,new DefaultConsumer(channel){
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
-                System.out.println("消费者1=>>"+new String(body));
+                System.out.println("消费者2===>"+new String(body));
             }
         });
-
-
 
     }
 }
