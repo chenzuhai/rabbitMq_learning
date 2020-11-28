@@ -43,5 +43,19 @@ public class TestRabbitMq {
         rabbitTemplate.convertAndSend("logs","","Fanout消息");
     }
 
+    //route
+    @Test
+    public void testRoute(){
+        rabbitTemplate.convertAndSend("directs","error","info消息");
+    }
+
+    //topic
+    @Test
+    public void testTopic(){
+        String key = "user.save";
+        rabbitTemplate.convertAndSend("topics",key,key);
+    }
+
+
 
 }
